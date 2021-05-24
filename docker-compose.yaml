@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+    mariadb:
+        image: mariadb:10.2
+        hostname: mariadb
+        restart: unless-stopped
+        environment:
+        - MYSQL_ROOT_PASSWORD=root
+        volumes:
+        - ./data/users.sql:/docker-entrypoint-initdb.d/users.sql
+
+    urlshortener:
+        image: kaisquaredockers/urlshortener:1.0.1
+        restart: unless-stopped
+        environment:
+        - DATABASE_ENGINE=mysql
+        - DATABASE_MYSQL_USER=testuser
+        - DATABASE_MYSQL_PASSWORD=testpassword
+        - DATABASE_MYSQL_HOST=mariadb
+        - DATABASE_MYSQL_DATABASE=urlshortener
+        #build: .
+        ports:
+        - "5000:5000"
+        depends_on:
+        - mariadb

@@ -19,6 +19,10 @@ class DBSQLEngine(metaclass=ABCMeta):
 
 class MySQLEngine(DBSQLEngine):
 
+    def __init__(self):
+        import pymysql
+        pymysql.install_as_MySQLdb()
+
     def dict(self):
         return config.config['database']['mysql']
 

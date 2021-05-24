@@ -32,7 +32,6 @@ def main():
     #append root_dir
     config.config['root'] = root_dir
 
-
     app.config['SQLALCHEMY_DATABASE_URI'] = DBSQLURL().get()
     config.config['db'] = flask_sqlalchemy.SQLAlchemy(app)
 
