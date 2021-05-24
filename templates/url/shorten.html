@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}/url/shorten{% endblock %}</h1>
+<a class="action" href="{{ url_for('url.index') }}">Index</a> {% endblock %} {% block content %}
+<form method="post">
+    <label for="long_url">Long URL</label>
+    <input name="long_url" id="long_url" value="{{ request.form['long_url'] or link['long_url']}}" required>
+    <input type="submit" value="Shorten">
+</form>
+{% if link %}
+<label for="short_url">Short URL:</label>
+<a href="{{ request.root_url + link['short_code'] }}">{{ request.root_url + link['short_code'] }}</a> {% endif %} {% endblock %}

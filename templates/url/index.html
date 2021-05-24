@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}History{% endblock %}</h1>
+<a class="action" href="{{ url_for('url.shorten') }}">Go</a> {% endblock %} {% block content %}
+<table>
+    <tr>
+        <th>Long URL</th>
+        <th>Short URL</th>
+        <th>Created</th>
+    </tr>{% for link in links %}
+    <tr>
+        <td>{{ link['long_url'] }}</td>
+        <td>
+            <a href="{{ request.root_url + link[ 'short_code'] }}">
+                <div>
+                    {{ request.root_url + link[ 'short_code'] }}
+                </div>
+            </a>
+        </td>
+        <td>{{ link['created_at'] | ctime }}</td>
+    </tr>
+    {% endfor %}</table> {% endblock %}
