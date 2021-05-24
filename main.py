@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import argparse
 import os
 import sys
 import time
@@ -23,11 +22,8 @@ def page_not_found(error):
 def timectime(s):
     return time.ctime(s/1000) # datetime.datetime.fromtimestamp(s)
 
-def main():
-    parser = argparse.ArgumentParser(description="An URL Shortener Service")
-    parser.add_argument("-p", "--param", help="parameter configuration file")
-    args = parser.parse_args()
-    config.config = config.Config(args.param).config_dict
+def create_app():
+    config.config = config.Config().config_dict
 
     #append root_dir
     config.config['root'] = root_dir
@@ -40,8 +36,8 @@ def main():
 
     import url
     app.register_blueprint(url.bp)
-    app.run()
+    return app
 
 
 if __name__ == '__main__':
-    main()
+    create_app().run()

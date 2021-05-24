@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-from main import main, app
+from main import create_app
 
 print("Starting wsgi.py")
 
-main()
+app = create_app()
 
